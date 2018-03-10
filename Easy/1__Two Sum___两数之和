@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int>cdata(nums);//用于存储排序数据  
+        vector<int>index;//索引  
+        partial_sort_copy(nums.begin(), nums.end(), cdata.begin(), cdata.end());//拷贝排序  
+        int i = 0, j = cdata.size() - 1;//双下标  
+        int result = cdata.at(i) + cdata.at(j);  
+        while(result != target){  
+            if (result > target){  
+                --j;//向前移动下标  
+            }  
+            else{  
+                ++i;//向后移动下标  
+            }  
+            result = cdata.at(i) + cdata.at(j);  
+        }  
+       
+        int pos = find(nums.begin(), nums.end(), cdata.at(i)) - nums.begin();  
+        index.push_back(pos);  
+        nums.at(pos) = cdata.at(j) + 1;//防止该位置被二次检索  
+        index.push_back(find(nums.begin(), nums.end(), cdata.at(j)) - nums.begin());  
+        sort(index.begin(), index.end());  
+        return index;  
+    }
+};
