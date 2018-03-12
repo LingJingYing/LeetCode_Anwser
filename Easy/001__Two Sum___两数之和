@@ -18,7 +18,7 @@ public:
        
         int pos = find(nums.begin(), nums.end(), cdata.at(i)) - nums.begin();  
         index.push_back(pos);  
-        nums.at(pos) = cdata.at(j) + 1;//防止该位置被二次检索  
+        nums.at(pos) = cdata.at(j) + 1;//防止该位置被二次检索防止该位置被二次检索，因为例如出现{1,1,2}，目标是2，则第一个数会被二次检索，出现结果{0,0}
         index.push_back(find(nums.begin(), nums.end(), cdata.at(j)) - nums.begin());  
         sort(index.begin(), index.end());  
         return index;  
