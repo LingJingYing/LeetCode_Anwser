@@ -1,0 +1,28 @@
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+       if (needle == "")
+			return 0;
+		if (haystack == "" || (needle.size() > haystack.size()))
+			return -1;
+		int i, j, flag;
+		for (i = flag = 0; i < haystack.size() - needle.size() + 1; i++)//减少循环次数
+		{
+			if (haystack[i] == needle[0])
+			{
+				for (j = flag = 1; j < needle.size(); j++)
+				{
+					if (haystack[i + j] != needle[j])
+					{
+						flag = 0;
+						break;
+					}
+				}
+
+				if (flag)
+					return i;
+			}
+		}
+		return -1;
+    }
+};
