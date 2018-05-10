@@ -1,0 +1,15 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        string res = "";
+		int m = a.size() - 1, n = b.size() - 1, add = 0;
+		while (m >= 0 || n >= 0) {
+			int p = m >= 0 ? a[m--] - '0' : 0;
+			int q = n >= 0 ? b[n--] - '0' : 0;
+			int val = p + q + add;
+			res = to_string(val % 2) + res; // 字符串的相加
+			add = val / 2;
+		}
+		return add == 1 ? "1" + res : res;
+    }
+};
