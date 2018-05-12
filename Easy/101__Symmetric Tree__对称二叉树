@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:  
+    bool isSymmetric(TreeNode *root) {  
+       if(!root) return true;   //空树是对称的  
+       return symmetric(root->left,root->right);  
+    }  
+private:  
+   bool symmetric(TreeNode *p,TreeNode *q)       /*判断两棵树是否对称*/  
+   {     
+       if(!p && !q) return true;       //都是空  
+       if(!p || !q) return false;      //只有一个空  
+       return (p->val==q->val)&&symmetric(p->left,q->right) && symmetric(p->right,q->left);     
+       /*树p和树q对称的条件：p和q的值相同，并且p的左子树与q的右子树对称，p的右子树与q的左子树对称*/  
+   }  
+};
+
+class Solution {  
+public:  
+    bool isSymmetric(TreeNode *root) {  
+      if(!root) return true;   //空树是对称的  
+      stack<TreeNode *> s;  
+      TreeNode *p=root->left,*q=root->right;  
+      s.push(p);  
+      s.push(q);        //即使是空节点，也是可以push到栈里的，栈并不为空。  
+      while(!s.empty())  
+      {  
+          p=s.top();s.pop();  
+          q=s.top();s.pop();  
+            
+          if(!p && !q) continue;            //p、q都是空节点  
+          if(!p || !q) return false;        //有一个为空，不对称  
+          if(p->val!=q->val) return false;  //值不相等，不对称  
+            
+          s.push(p->left);s.push(q->right);  
+          s.push(p->right);s.push(q->left);  
+      }  
+      return true;  
+    }  
+  
+};
