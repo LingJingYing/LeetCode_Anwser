@@ -1,0 +1,32 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+static auto x = [](){
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(0);
+	return 0;
+}();
+class Solution {
+public:
+    bool isBalanced(TreeNode* root) {
+	if (countHeight(root) == -1) return false;
+	else return true;
+
+}
+int countHeight(TreeNode* root) {
+	if (!root) return 0;
+	int left = countHeight(root->left);
+	int right = countHeight(root->right);
+	if (left == -1 || right == -1) return -1;
+	int diff = abs(left - right);
+	if (diff > 1) return -1;
+	else return 1 + max(left, right);
+
+}
+};
