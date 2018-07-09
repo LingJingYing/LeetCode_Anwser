@@ -1,0 +1,30 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+   TreeNode *sortedArrayToBST(vector<int> &num)
+    {
+        return sortedArrayToBST(num , 0 , num.size() - 1);
+    }
+    //使用二分法建立平衡二叉搜索树
+    TreeNode *sortedArrayToBST(vector<int> &num , int begin , int end)
+    {
+        //递归结束条件
+        if(begin > end)
+            return NULL;
+        int mid = (begin + end)/2;
+        TreeNode *root = new TreeNode(num[mid]);//根结点，为当前数组的中间值
+        root->left = sortedArrayToBST(num , begin , mid - 1);//根结点的左孩子为左半段数组的中间值
+        root->right = sortedArrayToBST(num , mid + 1 , end);//根结点的右孩子为右半段数组的中间值
+        return root;
+    }
+
+
+};
