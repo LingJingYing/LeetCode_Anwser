@@ -7,6 +7,7 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+//关闭流同步
 static auto x = [](){
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(0);
