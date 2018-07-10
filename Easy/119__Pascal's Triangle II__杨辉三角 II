@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+    	vector<int> res = {1};
+    	if(rowIndex == 0)
+    		return res;
+    	res.push_back(1);
+    	if(rowIndex == 1)
+    		return res;
+    	
+    	for(int i = 1; i < rowIndex;i++)
+    	{
+    		vector<int> tmp = {1};
+
+        	for(int j = 1; j < res.size();j++)
+        		tmp.push_back(res[j-1]+res[j]);
+
+        	tmp.push_back(1);
+        	res = tmp;
+
+    	}
+    	return res;
+       
+    }
+};
+
+class Solution {
+public:
+    vector<int> getRow(int n) {
+        
+        vector<int> ret(n + 1);
+        
+        ret[n] = 1;
+                
+        for (int i = 1; i <= n; i++)
+        {
+            for (int j = n - i; j < n; j++)
+            {
+                ret[j] += ret[j+1];
+            }
+        }
+        
+        return ret;
+    }
+};
