@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> res;
+        if(numRows == 0)
+        	return res;
+        vector<int> v = {1};
+        res.push_back(v);
+        if(numRows == 1)
+        	return res;
+        v.push_back(1);
+        res.push_back(v);
+        if(numRows == 2)
+        	return res;
+        for(int i = 0; i < numRows -2; i++)
+        {
+        	vector<int> tmp = {1};
+
+        	for(int j = 1; j < v.size();j++)
+        		tmp.push_back(v[j-1]+v[j]);
+
+        	tmp.push_back(1);
+        	v = tmp;
+        	res.push_back(v);
+        }
+        return res;
+    }
+};
+
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+      std::vector<std::vector<int>> ret;
+      for (auto row = 1; row <= numRows; ++row)
+      {
+        ret.emplace_back(std::vector<int>(row, 1));
+      }
+      
+      for (auto row = 3; row <= numRows; ++row)
+      {
+        for (auto index = 1; index < row - 1; ++index)
+        {  
+          ret[row - 1][index] = ret[row - 2][index - 1] + ret[row - 2][index];
+        } 
+      }
+      return ret;
+
+    }
+};
