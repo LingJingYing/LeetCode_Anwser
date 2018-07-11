@@ -1,0 +1,23 @@
+static const auto __ = []() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    bool static isPalindrome(string s) {
+        int left=0,right=s.length()-1;
+        transform(s.begin(),s.end(),s.begin(),::tolower);
+        while(left<=right){
+            while(!isalnum(s[left])){
+                left++;
+            }
+            while(!isalnum(s[right])){
+                right--;
+            }
+            if(left<=right&&s[left++]!=s[right--])
+                return false;
+        }
+        return true;
+    }
+};
