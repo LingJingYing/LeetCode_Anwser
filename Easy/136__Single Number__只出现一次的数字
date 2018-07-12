@@ -1,0 +1,17 @@
+static const auto __ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    int static singleNumber(vector<int>& nums) {
+        //一个整数 a 抑或另一个整数两次后，得到的还是原整数 a
+        //0 抑或另一个整数 b，得到的结果是 b
+        int result=0;
+        for(int num:nums){
+            result^=num;
+        }
+        return result;
+    }
+};
