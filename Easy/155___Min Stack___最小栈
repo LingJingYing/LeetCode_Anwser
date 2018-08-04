@@ -1,0 +1,141 @@
+class MinStack {
+private:
+    struct Node
+    {
+        int val;
+        Node* parent;
+        Node(int v):val(v),parent(NULL){}
+    };
+    
+    Node *cur, *min;
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+        cur = NULL;
+        min = NULL;
+    }
+     ~MinStack() {
+       while(cur != NULL)
+       {
+           Node *tmp = cur;
+           cur = cur->parent;
+           delete tmp;
+       }
+        min = NULL;
+    }
+    
+    void push(int x) {
+        Node *tmp = new Node(x);
+        tmp->parent = cur;
+        cur = tmp;
+        if(min == NULL || min->val > cur->val)
+            min = cur;
+    }
+    
+    void pop() {
+        Node *tmp = cur;
+        cur = cur->parent;
+        if(cur == NULL)
+            min = cur;
+        else if(min == tmp)
+        {
+            Node *p = cur->parent;
+            int t = cur->val;
+            min = cur;
+            while(p != NULL)
+            {
+                if(t >= p->val)
+                {
+                    t = p->val;
+                    min = p;
+                }
+                p = p->parent;
+            }
+        }
+            
+        delete tmp;
+    }
+    
+    int top() {
+        return cur->val;
+    }
+    
+    int getMin() {
+        return min->val;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
+
+
+class MinStackNode{
+public:
+    int val;
+    MinStackNode* front;
+    MinStackNode(int val){
+        this->val=val;
+    };
+    MinStackNode(int val,MinStackNode* front){
+        this->val=val;
+        this->front=front;
+    };
+};
+class MinStack {
+private:
+    MinStackNode* data;
+    MinStackNode* mindata;
+public:
+    /** initialize your data structure here. */
+    MinStack() {
+        data=NULL;
+        mindata=NULL;
+    }
+    
+    void push(int x) {
+        MinStackNode* d=new MinStackNode(x,data);
+        data=d;
+        if(mindata==NULL){
+            MinStackNode* mind=new MinStackNode(x,mindata);
+            mindata=mind;
+        }
+        else{
+            if(mindata->val>x){
+                MinStackNode* mind=new MinStackNode(x,mindata);
+                mindata=mind;
+            }
+            else{
+                MinStackNode* mind=new MinStackNode(mindata->val,mindata);
+                mindata=mind;
+            }
+        }
+    }
+    
+    void pop() {
+        data=data->front;
+        mindata=mindata->front;
+    }
+    
+    int top() {
+        return data->val;
+    }
+    
+    int getMin() {
+        return mindata->val;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.push(x);
+ * obj.pop();
+ * int param_3 = obj.top();
+ * int param_4 = obj.getMin();
+ */
