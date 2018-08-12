@@ -1,0 +1,22 @@
+static auto x = [](){
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    return 0;
+}();
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int i, n = s.size(), m[128] = {};
+        bool u[128] = {};
+        for(i = 0; i < n; ++i){
+            if(m[s[i]]){
+                if(m[s[i]] != t[i])return false;
+            }else{
+                if(u[t[i]])return false;
+                m[s[i]] = t[i];
+                u[t[i]] = true;
+            }
+        }
+        return true;
+    }
+};
