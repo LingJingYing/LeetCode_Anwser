@@ -20,3 +20,25 @@ public:
         return true;
     }
 };
+
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        int aTob[256] = {0};//s到t的映射
+        int bToa[256] = {0};//t到s的映射
+        size_t len = s.size();
+
+        for(size_t i =0; i<len; ++i)
+        {
+            if(aTob[s[i]] == 0)
+                aTob[s[i]] = t[i];//初始化aTob
+            if(bToa[t[i]] == 0)
+                bToa[t[i]] = s[i];//初始化bToa
+            if(aTob[s[i]] != t[i] ||
+               bToa[t[i]] != s[i])
+                    return false;
+        }
+        return true;
+    }
+};
