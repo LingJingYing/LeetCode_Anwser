@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int size = nums.size();
+        k = k % size; // k 可能大于 size
+        // 翻转前半部分
+        for (int i = 0; i < (size - k) / 2; ++i) {
+            int t = nums[i];
+            nums[i] = nums[size-k-i-1];
+            nums[size-k-i-1] = t;
+        }
+        // 翻转右移出去的部分
+        for (int i = size - k; i <= (2 * size - k - 1) / 2; ++i) {
+            int t = nums[i];
+            nums[i] = nums[2*size-k-1-i];
+            nums[2*size-k-1-i] = t;
+        }
+        // 翻转整体
+        for (int i = 0; i < size / 2; i++) {
+            int t = nums[i];
+            nums[i] = nums[size-i-1];
+            nums[size-i-1] = t;
+        }
+    }
+};
