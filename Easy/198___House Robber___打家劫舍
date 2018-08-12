@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if(nums.size() <= 1){
+            return nums.size() == 0 ? 0 : nums[0];
+        }
+        // a是上次的最大收益
+        int a = nums[0];
+        // b是当前的最大受益
+        int b = max(nums[0], nums[1]);
+        for(int i = 2; i < nums.size(); i++){
+            int tmp = b;
+            // 当前的最大收益是两种选择里较大的那个
+            b = max(a + nums[i], b);
+            a = tmp;
+        }
+        return b;
+    }
+};
