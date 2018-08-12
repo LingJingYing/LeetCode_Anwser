@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool isHappy(int n) {
+        set<int> s;
+        while(n){
+            int t = 0;
+            while(n){
+                t += (n%10) * (n%10);
+                n = n/10;
+            }
+            n = t;
+            if(s.count(t)) break; // 如果不是快乐树，则之前出现过的结果会再次出现
+            else s.insert(n);
+        }
+        return n == 1;
+    }
+};
