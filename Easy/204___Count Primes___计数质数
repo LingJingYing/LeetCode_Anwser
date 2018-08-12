@@ -1,0 +1,46 @@
+/*
+我们从2开始遍历到根号n，先找到第一个质数2，然后将其所有的倍数全部标记出来，
+然后到下一个质数3，标记其所有倍数，一次类推，直到根号n，此时数组中未被标记的数字就是质数。
+我们需要一个n-1长度的bool型数组来记录每个数字是否被标记，长度为n-1的原因是题目说是小于n的质数个数，并不包括n
+*/
+
+/*class Solution {
+public:
+    int flag[10000000];
+    void judge(int x,int n)
+    {
+        for(int i=2;i<n;i=x*i){
+            flag[i]=0;
+            i++;
+        }
+    }
+    int countPrimes(int n) {
+        memset(flag,1,sizeof(flag));
+        int num=0;
+        for(int i=2;i<n;i++)
+        {
+            judge(i,n); 
+            if(flag[i]) num++;
+        }
+        return num;
+    }
+};*/
+
+class Solution {
+public:
+int countPrimes(int n) {
+    if(--n < 2) return 0;
+    int m = (n + 1)/2, count = m, k, u = (sqrt(n))/2;
+    bool notPrime[m] = {0};
+
+    for(int i = 1; i <= u;i++)
+        if(!notPrime[i])
+          for(k = (i+ 1)*2*i; k < m;k += i*2 + 1)
+              if (!notPrime[k])
+              {
+                  notPrime[k] = true;
+                  count--;
+              }
+    return count;
+}  //8ms
+};
