@@ -1,0 +1,51 @@
+// 不断除 2 ，看余数
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n < 1){
+            return false;
+        }
+        while(n % 2 == 0){
+            n /= 2;
+        }
+        return n == 1;
+    }
+};
+
+// 用能够表示的最大的 2 的幂来除，余数不为零就不是 2 的幂
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {        
+        if (n <= 0) {
+            return false;
+        }
+        int64_t s = 2147483648;
+        if (s % n == 0)
+        {
+            return true;
+        }
+        return false;
+    }
+};
+
+// 遍历法，一个一个对比 2 的幂
+static const auto x = []()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    return 0;
+}();
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        int tmp = 1;
+        int time = 31;
+        while(time--)
+        {
+            if (n == tmp)
+                return true;
+            tmp = tmp << 1;
+        }
+        return false;
+    }
+};
