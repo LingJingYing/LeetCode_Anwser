@@ -1,0 +1,38 @@
+// 和差法
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int sum = 0, n = nums.size();
+        for (auto &a : nums) {
+            sum += a;
+        }
+        return 0.5 * n * (n + 1) - sum; // 等差数列求和
+    }
+};
+
+// 异或法，相同的数异或为 0
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int res = 0;
+        for (int i = 0; i < nums.size(); ++i) {
+            res ^= (i + 1) ^ nums[i];
+        }
+        return res;
+    }
+};
+
+// 二分法，先排序，下标小于数值，则在左，否则，在右
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        int left = 0, right = nums.size();
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] > mid) right = mid;
+            else left = mid + 1;
+        }
+        return right;
+    }
+};
