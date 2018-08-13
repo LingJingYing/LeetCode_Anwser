@@ -1,0 +1,37 @@
+// 递归
+class Solution {
+public:
+    int addDigits(int num) {
+        if(num / 10 == 0)
+            return num;
+        int tmp = 0;
+        while(num > 0)
+        {
+            tmp += num % 10;
+            num /= 10;
+        }
+        num = tmp;
+        return addDigits(num);
+    }
+};
+
+// 迭代
+class Solution {
+public:
+    int addDigits(int num) {
+        while (num >= 10) {
+            num = (num%10) + num/10;
+        }
+        
+        return num;
+    }
+};
+
+// 不使用递归或迭代
+// 通过枚举发现有规律, 即若数为9的倍数, 则结果为9, 若不是, 则各位相加的结果为对九取余
+class Solution {
+public:
+    int addDigits(int num) {
+        return 1 + (num - 1) % 9; //减 1 再加 1 是为了处理 num == 9 的情况
+    }
+};
