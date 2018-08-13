@@ -1,0 +1,18 @@
+// & 结果标志是否进位， ^ 结果是没有加上进位的结果
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int res = 0;
+        //不进位的加和
+        int nf = a^b;
+
+        //进位和
+        int forward = (a&b)<<1;
+        if(forward != 0){
+            res = getSum(nf,forward);//循环处理 进位和+不进位加和
+        }else {
+            res = nf;
+        }
+        return res;
+    }
+};
