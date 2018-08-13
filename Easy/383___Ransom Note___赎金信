@@ -1,0 +1,23 @@
+static auto __ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    bool canConstruct(string &ransomNote, string &magazine) {
+      for(auto i:ransomNote)
+      {
+          int pos=magazine.find(i);
+          if(pos!=string::npos)
+          {
+              swap(magazine[pos],magazine.back());
+              magazine.pop_back();
+          }
+          else
+              return false;
+               
+      }
+        return true;
+    }
+};
