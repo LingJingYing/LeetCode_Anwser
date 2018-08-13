@@ -1,0 +1,7 @@
+// 目的是让对手在最有一次拿的时候还剩 4 个，所以自己拿的时候不能使 4 的倍数，否则无法让对手拿到 4 的倍数，因为一次最多拿 3 个
+class Solution {
+public:
+    bool canWinNim(int n) {
+        return n % 4;
+    }
+};
