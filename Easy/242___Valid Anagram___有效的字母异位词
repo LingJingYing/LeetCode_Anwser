@@ -1,0 +1,47 @@
+static auto x = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+                int ret = 0;
+        // int s_sum = 0;
+        // int t_sum = 0;
+        int s_times = 1;
+        int t_times = 1;
+
+        for (int i = 0; i < s.length(); i++)
+        {
+            int c = int(s[i]);
+            ret ^= c;
+            // s_sum += c;
+            s_times *= c;
+        }
+
+        for (int i = 0; i < t.length(); i++)
+        {
+            int c = int(t[i]);
+            ret ^= c;
+            // t_sum += c;
+            t_times *= c;
+        }
+        // return ret == 0 && s_sum == t_sum && s_times == t_times;
+        return ret == 0 && s_times == t_times;
+    }
+};
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        int a[128]{},b[128]{};
+        for(auto &c:s)++a[c];
+        for(auto &c:t)++b[c];
+        for(int i='a';i<='z';++i){
+            if(a[i]!=b[i])return false;
+        }
+        return true;
+    }
+};
