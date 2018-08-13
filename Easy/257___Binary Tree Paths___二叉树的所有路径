@@ -14,12 +14,14 @@ public:
         string str;
         
         if(!root) return res;
-        if(!root->left && !root->right)
+        
+        if(!root->left && !root->right) // 如果为根结点，就创建一个新的 字符串
         { 
             res.push_back(to_string(root->val));
             return res;
         }
         
+        // 根结点的父结点相同，所以递归调用返回时，在每个字符串前插入父结点的值
         if(root->left)
         {
             lf = binaryTreePaths(root->left);
@@ -33,7 +35,7 @@ public:
             for(string& s : rt)
                s = to_string(root->val) + "->" + s;
         }
-         
+        // 左右结果拼接在一起
         res = lf;
         for(string& s : rt)
             res.push_back(s);
