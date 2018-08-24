@@ -1,0 +1,49 @@
+class Solution {
+public:
+    int myAtoi(string str) {
+        if(str.empty())
+            return 0;
+        
+        int i = 0;
+        // 除去前面的空格
+        while(str[i] == ' ') i++;
+        bool flag = true;
+        
+        // 第一个是 - ，或不是数字
+        if(str[i] == '-')
+        {
+            i++;
+            flag = false;
+        }
+        else if(str[i] == '+')
+            i++;
+        else if(str[i]<'0'||str[i]>'9')
+            return 0;
+        //获取数字
+        string num;
+        while(i<str.length() && str[i] == '0') i++; //除去前面的 0
+        while(i<str.length() && str[i] >= '0' && str[i] <= '9') num += str[i++];
+        //数字为空
+        if(num.empty())
+            return 0;
+        // 是否超过可表示数字范围
+         string min = "2147483648", max = "2147483647";
+        
+        if(num.length() > min.length())
+            return flag? 2147483647 : -2147483648;
+        
+        if(num.length() == min.length())
+        {
+            if(flag && num >= max)
+                return 2147483647;
+            else if(!flag && num >= min)
+                return -2147483648;
+        }
+        
+        int result = 0;
+        for(char c : num)
+            result = result * 10 + (c - '0');
+            
+        return flag?result : (0-result);
+    }
+};
