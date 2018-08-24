@@ -35,3 +35,38 @@ public:
         return s.substr(pos, res-1);
     }
 };
+
+////////////////
+static const auto __ = []() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    return nullptr;
+}();
+class Solution {
+public:
+    
+    static string longestPalindrome(string s) {
+        int len = (int) s.length();
+        int left = 0;
+        int right = 0;
+        int leftres = 0;
+        int maxlen = 0;
+
+        int i = 0;
+        while (i < len) {
+            left = i;
+            right = i;
+            while (right + 1 < len && s[right] == s[right + 1]) ++right;
+            i=right+1;
+            while (left >= 0 && right < len && s[left] == s[right]) {
+                --left;
+                ++right;
+            }
+            if (maxlen < right - left - 1) {
+                leftres = left + 1;
+                maxlen = right - left - 1;
+            }
+        }
+        return s.substr(leftres, maxlen);
+    }
+};
