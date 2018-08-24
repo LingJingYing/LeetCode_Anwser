@@ -1,0 +1,50 @@
+// 嵌套循环求解
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.empty())
+            return 0;
+        int res  = 1;
+        for(int i = 0; i < s.length(); i++)
+        {
+            if(s.length() - i <= res)
+                break;
+            int count = 1;
+            vector<char> ss;
+            ss.push_back(s[i]);
+            for(int j = i+1; j <s.length(); j++)
+            {
+                if(find(ss.begin(), ss.end(), s[j]) != ss.end())
+                    break;
+                count++;
+                ss.push_back(s[j]);
+            }
+            if(count > res)
+                res = count;
+        }
+        return res;
+    }
+};
+
+// 已经找过的字符就无需重复查找，减少时间复杂度
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.empty())
+            return 0;
+        int res  = 1;
+        string ss;
+        ss.push_back(s[0]);
+        for(int i = 1; i < s.length(); i++)
+        {
+            size_t pos = ss.find(s[i]);
+            if( pos != string::npos)
+                ss.erase(0, pos+1);
+            
+            ss += s[i];
+            if(ss.length() > res)
+                res = ss.length();
+        }
+        return res;
+    }
+};
