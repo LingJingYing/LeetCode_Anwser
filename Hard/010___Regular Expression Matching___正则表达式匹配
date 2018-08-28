@@ -1,3 +1,4 @@
+// 迭代法
 class Solution {
 public:
     bool isMatch(string s, string p) {
@@ -17,14 +18,16 @@ public:
     }
 };
 
+// 动态规划 
 class Solution {
 public:
     bool isMatch(string s, string p) {
         int m = s.size(), n = p.size();
-        vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));
+        vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));//表示s的前i位和p的前j位是匹配的
         dp[0][0] = true;
+        // 依次比较 s 和 p 的前n个字符是否匹配，判定方法和迭代法相同
         for (int i = 0; i <= m; ++i) {
-            for (int j = 1; j <= n; ++j) {
+            for (int j = 1; j <= n; ++j) { // p 为空是边界条件，若 s 也为空，则做操作，直接返回true，若s不为空，则不做操作，返回false
                 if (j > 1 && p[j - 1] == '*') {
                     dp[i][j] = dp[i][j - 2] || (i > 0 && (s[i - 1] == p[j - 2] || p[j - 2] == '.') && dp[i - 1][j]);
                 } else {
