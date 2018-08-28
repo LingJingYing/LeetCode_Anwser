@@ -1,0 +1,29 @@
+static auto x = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    return 0;
+}();
+// 两边向内计算，最大体积的两个边界内的高度一般都小于边界高度，如果有高于边界高度的，算出的体积也较小，所以从两边向内计算即可
+class Solution {
+public:
+    int maxArea(vector<int>& height) {
+        uint len = height.size(), area = 0, widht = 0, lenght = 0;
+        int l_ans = 0, r_ans = len - 1;
+        // 用两个标志指向数组头尾
+        while(l_ans != r_ans){
+            widht = r_ans - l_ans;
+            // 取出小的那个高度，并且小的那个标志位向内移动
+            if(height[l_ans] < height[r_ans]){
+                lenght = height[l_ans];
+                l_ans++;
+            }
+            else{
+                lenght = height[r_ans];
+                r_ans--;
+            }
+            uint area_tp = widht * lenght;
+            area = max(area, area_tp); 
+        }
+    return area;    
+    }
+};
