@@ -1,0 +1,24 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        string Roma = "IVXLCDM";
+        string res;
+        int index = 0;
+        while(num > 0)
+        {
+            int tmp = num % 10;
+            if(tmp < 4)
+                res = string(tmp, Roma[index]) + res;
+            else if(tmp == 4)
+                res = Roma[index] + (Roma[index+1] + res);
+            else if(tmp < 9)
+                res = Roma[index+ 1] + string(tmp-5, Roma[index]) + res;
+            else
+                    res = Roma[index] + (Roma[index+2] + res);
+            
+            num /= 10;
+            index += 2;
+        }
+        return res;
+    }
+};
